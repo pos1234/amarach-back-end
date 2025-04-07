@@ -9,7 +9,7 @@
     "displayName": "User"
   },
   "options": {
-    "timestamps": true
+    "draftAndPublish": false
   },
   "attributes": {
     "username": {
@@ -82,6 +82,15 @@
       "relation": "oneToMany",
       "target": "api::comment.comment",
       "mappedBy": "users_permissions_user"
+    },
+    "accountType": {
+      "type": "enumeration",
+      "enum": [
+        "user",
+        "business"
+      ],
+      "default": "user",
+      "required": true
     }
   }
 }
