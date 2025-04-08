@@ -20,10 +20,6 @@
       "targetField": "title",
       "required": true
     },
-    "content": {
-      "type": "richtext",
-      "required": true
-    },
     "users_permissions_user": {
       "type": "relation",
       "relation": "manyToOne",
@@ -63,6 +59,22 @@
       "relation": "manyToMany",
       "target": "api::tag.tag",
       "mappedBy": "blogs"
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "blog_category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::blog-category.blog-category",
+      "inversedBy": "blogs"
+    },
+    "content": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.rich-text",
+      "required": true
     }
   }
 }
