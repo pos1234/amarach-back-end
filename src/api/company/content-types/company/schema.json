@@ -37,26 +37,62 @@
       "mappedBy": "company"
     },
     "logo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "files",
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "featuredImages": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
     },
     "services": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::service.service",
       "mappedBy": "company"
+    },
+    "location": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "text"
+    },
+    "social_accounts": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.social"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "company"
+    },
+    "phoneNumber": {
+      "type": "string"
+    },
+    "verified": {
+      "type": "boolean",
+      "default": false
+    },
+    "payment_tier": {
+      "type": "enumeration",
+      "enum": [
+        "gold",
+        "silver",
+        "bronze",
+        "none"
+      ],
+      "default": "none"
     }
   }
 }

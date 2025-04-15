@@ -554,16 +554,29 @@ export interface ApiCompanyCompany extends Struct.CollectionTypeSchema {
       'api::company.company'
     > &
       Schema.Attribute.Private;
+    location: Schema.Attribute.String;
     logo: Schema.Attribute.Media<'files' | 'images'>;
     name: Schema.Attribute.String & Schema.Attribute.Required;
+    payment_tier: Schema.Attribute.Enumeration<
+      ['gold', 'silver', 'bronze', 'none']
+    > &
+      Schema.Attribute.DefaultTo<'none'>;
+    phoneNumber: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     reviews: Schema.Attribute.Relation<'oneToMany', 'api::review.review'>;
     services: Schema.Attribute.Relation<'oneToMany', 'api::service.service'>;
     slug: Schema.Attribute.UID<'url'> & Schema.Attribute.Required;
+    social_accounts: Schema.Attribute.Component<'shared.social', false>;
+    summary: Schema.Attribute.Text;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     url: Schema.Attribute.String & Schema.Attribute.Required;
+    users_permissions_user: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    verified: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
   };
 }
 
@@ -1178,6 +1191,7 @@ export interface PluginUsersPermissionsUser
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     blogs: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'>;
     comments: Schema.Attribute.Relation<'oneToMany', 'api::comment.comment'>;
+    company: Schema.Attribute.Relation<'oneToOne', 'api::company.company'>;
     confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
     confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     createdAt: Schema.Attribute.DateTime;

@@ -91,6 +91,12 @@
       ],
       "default": "user",
       "required": true
+    },
+    "company": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::company.company",
+      "mappedBy": "users_permissions_user"
     }
   }
 }
