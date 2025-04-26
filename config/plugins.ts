@@ -6,4 +6,4 @@ module.exports = ({ env }) => ({
         allowedFields: ["accountType"],
       },
   },
-});
+}});
