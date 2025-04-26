@@ -5,6 +5,5 @@ module.exports = ({ env }) => ({
       register: {
         allowedFields: ["accountType"],
       },
-    },
   },
 });
