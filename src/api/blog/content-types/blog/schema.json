@@ -75,6 +75,12 @@
       "repeatable": false,
       "component": "shared.rich-text",
       "required": true
+    },
+    "company": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::company.company",
+      "inversedBy": "blogs"
     }
   }
 }

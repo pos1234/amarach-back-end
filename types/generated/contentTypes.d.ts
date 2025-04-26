@@ -421,6 +421,7 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.DefaultTo<'Pending'>;
     comments: Schema.Attribute.Relation<'oneToMany', 'api::comment.comment'>;
+    company: Schema.Attribute.Relation<'manyToOne', 'api::company.company'>;
     content: Schema.Attribute.Component<'shared.rich-text', false> &
       Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
@@ -543,6 +544,7 @@ export interface ApiCompanyCompany extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    blogs: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'>;
     category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -567,6 +569,15 @@ export interface ApiCompanyCompany extends Struct.CollectionTypeSchema {
     services: Schema.Attribute.Relation<'oneToMany', 'api::service.service'>;
     slug: Schema.Attribute.UID<'url'> & Schema.Attribute.Required;
     social_accounts: Schema.Attribute.Component<'shared.social', false>;
+    sort_order: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 3;
+          min: 0;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<0>;
     summary: Schema.Attribute.Text;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1213,6 +1224,7 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
+    profile: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     provider: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     resetPasswordToken: Schema.Attribute.String & Schema.Attribute.Private;

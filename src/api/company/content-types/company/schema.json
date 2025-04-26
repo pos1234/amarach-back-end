@@ -93,6 +93,18 @@
         "none"
       ],
       "default": "none"
+    },
+    "sort_order": {
+      "max": 3,
+      "default": 0,
+      "type": "integer",
+      "min": 0
+    },
+    "blogs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::blog.blog",
+      "mappedBy": "company"
     }
   }
 }
