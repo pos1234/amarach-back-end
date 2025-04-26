@@ -55,6 +55,12 @@
         "Rejected"
       ],
       "default": "Pending"
+    },
+    "company": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::company.company",
+      "inversedBy": "services"
     }
   }
 }

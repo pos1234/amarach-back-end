@@ -31,12 +31,6 @@
       "target": "plugin::users-permissions.user",
       "inversedBy": "reviews"
     },
-    "product": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::product.product",
-      "inversedBy": "reviews"
-    },
     "service": {
       "type": "relation",
       "relation": "manyToOne",
@@ -51,6 +45,12 @@
         "Rejected"
       ],
       "default": "Pending"
+    },
+    "company": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::company.company",
+      "inversedBy": "reviews"
     }
   }
 }

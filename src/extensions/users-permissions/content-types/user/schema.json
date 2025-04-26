@@ -9,7 +9,7 @@
     "displayName": "User"
   },
   "options": {
-    "timestamps": true
+    "draftAndPublish": false
   },
   "attributes": {
     "username": {
@@ -82,6 +82,31 @@
       "relation": "oneToMany",
       "target": "api::comment.comment",
       "mappedBy": "users_permissions_user"
+    },
+    "accountType": {
+      "type": "enumeration",
+      "enum": [
+        "user",
+        "business"
+      ],
+      "default": "user",
+      "required": true
+    },
+    "company": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::company.company",
+      "mappedBy": "users_permissions_user"
+    },
+    "profile": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

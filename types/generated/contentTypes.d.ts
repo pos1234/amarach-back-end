@@ -369,6 +369,37 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiBlogCategoryBlogCategory
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'blog_categories';
+  info: {
+    displayName: 'blogCategory';
+    pluralName: 'blog-categories';
+    singularName: 'blog-category';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    blogs: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::blog-category.blog-category'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'name'> & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
   collectionName: 'blogs';
   info: {
@@ -381,17 +412,24 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    blog_category: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::blog-category.blog-category'
+    >;
     blog_status: Schema.Attribute.Enumeration<
       ['Pending', 'Approved', 'Rejected']
     > &
       Schema.Attribute.DefaultTo<'Pending'>;
     comments: Schema.Attribute.Relation<'oneToMany', 'api::comment.comment'>;
-    content: Schema.Attribute.RichText & Schema.Attribute.Required;
+    company: Schema.Attribute.Relation<'manyToOne', 'api::company.company'>;
+    content: Schema.Attribute.Component<'shared.rich-text', false> &
+      Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     enableComments: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<false>;
+    featured: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     image: Schema.Attribute.Media<'images' | 'files'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'> &
@@ -422,13 +460,21 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    backgroundColor: Schema.Attribute.String;
+    categories: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::category.category'
+    >;
+    category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
     category_status: Schema.Attribute.Enumeration<
       ['Pending', 'Approved', 'Rejected']
     > &
       Schema.Attribute.DefaultTo<'Pending'>;
+    companies: Schema.Attribute.Relation<'oneToMany', 'api::company.company'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    icon: Schema.Attribute.Media<'images' | 'files'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -436,7 +482,6 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     name: Schema.Attribute.String & Schema.Attribute.Required;
-    products: Schema.Attribute.Relation<'oneToMany', 'api::product.product'>;
     publishedAt: Schema.Attribute.DateTime;
     services: Schema.Attribute.Relation<'oneToMany', 'api::service.service'>;
     slug: Schema.Attribute.UID<'name'> & Schema.Attribute.Required;
@@ -487,6 +532,65 @@ export interface ApiCommentComment extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiCompanyCompany extends Struct.CollectionTypeSchema {
+  collectionName: 'companies';
+  info: {
+    description: '';
+    displayName: 'Company';
+    pluralName: 'companies';
+    singularName: 'company';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    blogs: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'>;
+    category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    featuredImages: Schema.Attribute.Media<'images' | 'files', true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::company.company'
+    > &
+      Schema.Attribute.Private;
+    location: Schema.Attribute.String;
+    logo: Schema.Attribute.Media<'files' | 'images'>;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    payment_tier: Schema.Attribute.Enumeration<
+      ['gold', 'silver', 'bronze', 'none']
+    > &
+      Schema.Attribute.DefaultTo<'none'>;
+    phoneNumber: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    reviews: Schema.Attribute.Relation<'oneToMany', 'api::review.review'>;
+    services: Schema.Attribute.Relation<'oneToMany', 'api::service.service'>;
+    slug: Schema.Attribute.UID<'url'> & Schema.Attribute.Required;
+    social_accounts: Schema.Attribute.Component<'shared.social', false>;
+    sort_order: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 3;
+          min: 0;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<0>;
+    summary: Schema.Attribute.Text;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
+    users_permissions_user: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    verified: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+  };
+}
+
 export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   collectionName: 'globals';
   info: {
@@ -519,45 +623,6 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   };
 }
 
-export interface ApiProductProduct extends Struct.CollectionTypeSchema {
-  collectionName: 'products';
-  info: {
-    description: '';
-    displayName: 'Product';
-    pluralName: 'products';
-    singularName: 'product';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    average_rating: Schema.Attribute.BigInteger;
-    category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    description: Schema.Attribute.Text;
-    image: Schema.Attribute.Media<'images' | 'files', true>;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::product.product'
-    > &
-      Schema.Attribute.Private;
-    name: Schema.Attribute.String & Schema.Attribute.Required;
-    product_status: Schema.Attribute.Enumeration<
-      ['Pending', 'Approved', 'Rejected']
-    > &
-      Schema.Attribute.DefaultTo<'Pending'>;
-    publishedAt: Schema.Attribute.DateTime;
-    reviews: Schema.Attribute.Relation<'oneToMany', 'api::review.review'>;
-    slug: Schema.Attribute.UID<'name'> & Schema.Attribute.Required;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiReviewReview extends Struct.CollectionTypeSchema {
   collectionName: 'reviews';
   info: {
@@ -570,6 +635,7 @@ export interface ApiReviewReview extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    company: Schema.Attribute.Relation<'manyToOne', 'api::company.company'>;
     content: Schema.Attribute.RichText & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -580,7 +646,6 @@ export interface ApiReviewReview extends Struct.CollectionTypeSchema {
       'api::review.review'
     > &
       Schema.Attribute.Private;
-    product: Schema.Attribute.Relation<'manyToOne', 'api::product.product'>;
     publishedAt: Schema.Attribute.DateTime;
     rating: Schema.Attribute.Integer &
       Schema.Attribute.Required &
@@ -621,6 +686,7 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
   attributes: {
     average_rating: Schema.Attribute.BigInteger;
     category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
+    company: Schema.Attribute.Relation<'manyToOne', 'api::company.company'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1128,12 +1194,15 @@ export interface PluginUsersPermissionsUser
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
+    accountType: Schema.Attribute.Enumeration<['user', 'business']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'user'>;
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     blogs: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'>;
     comments: Schema.Attribute.Relation<'oneToMany', 'api::comment.comment'>;
+    company: Schema.Attribute.Relation<'oneToOne', 'api::company.company'>;
     confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
     confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     createdAt: Schema.Attribute.DateTime;
@@ -1155,6 +1224,7 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
+    profile: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     provider: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     resetPasswordToken: Schema.Attribute.String & Schema.Attribute.Private;
@@ -1185,11 +1255,12 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::blog-category.blog-category': ApiBlogCategoryBlogCategory;
       'api::blog.blog': ApiBlogBlog;
       'api::category.category': ApiCategoryCategory;
       'api::comment.comment': ApiCommentComment;
+      'api::company.company': ApiCompanyCompany;
       'api::global.global': ApiGlobalGlobal;
-      'api::product.product': ApiProductProduct;
       'api::review.review': ApiReviewReview;
       'api::service.service': ApiServiceService;
       'api::tag.tag': ApiTagTag;
