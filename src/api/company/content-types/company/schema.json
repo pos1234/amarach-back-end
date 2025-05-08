@@ -105,6 +105,12 @@
       "relation": "oneToMany",
       "target": "api::blog.blog",
       "mappedBy": "company"
+    },
+    "ad_insertions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::ad-insertion.ad-insertion",
+      "mappedBy": "company"
     }
   }
 }
