@@ -1,0 +1,61 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ad_insertions",
+  "info": {
+    "singularName": "ad-insertion",
+    "pluralName": "ad-insertions",
+    "displayName": "ad-insertion",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "startDate": {
+      "type": "date",
+      "required": true
+    },
+    "endDate": {
+      "type": "date"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "clickThroughUrl": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": true
+    },
+    "order": {
+      "type": "integer",
+      "default": 1
+    },
+    "position": {
+      "type": "enumeration",
+      "enum": [
+        "Top",
+        "Side"
+      ],
+      "default": "Top"
+    },
+    "company": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::company.company",
+      "inversedBy": "ad_insertions"
+    }
+  }
+}
