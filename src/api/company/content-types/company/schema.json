@@ -111,6 +111,9 @@
       "relation": "oneToMany",
       "target": "api::ad-insertion.ad-insertion",
       "mappedBy": "company"
+    },
+    "tin": {
+      "type": "string"
     }
   }
 }

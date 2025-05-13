@@ -39,10 +39,6 @@
       "targetField": "name",
       "required": true
     },
-    "order": {
-      "type": "integer",
-      "default": 1
-    },
     "position": {
       "type": "enumeration",
       "enum": [
@@ -56,6 +52,15 @@
       "relation": "manyToOne",
       "target": "api::company.company",
       "inversedBy": "ad_insertions"
+    },
+    "tier": {
+      "type": "enumeration",
+      "enum": [
+        "Gold",
+        "Silver",
+        "Bronze"
+      ],
+      "default": "Bronze"
     }
   }
 }

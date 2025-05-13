@@ -25,7 +25,7 @@
     },
     "image": {
       "type": "media",
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "allowedTypes": [
         "images",
@@ -61,6 +61,13 @@
       "relation": "manyToOne",
       "target": "api::company.company",
       "inversedBy": "services"
+    },
+    "delete": {
+      "type": "enumeration",
+      "enum": [
+        "Pending",
+        "Deleted"
+      ]
     }
   }
 }
