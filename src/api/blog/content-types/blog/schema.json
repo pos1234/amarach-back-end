@@ -39,12 +39,6 @@
       "type": "boolean",
       "default": false
     },
-    "comments": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::comment.comment",
-      "mappedBy": "blog"
-    },
     "blog_status": {
       "type": "enumeration",
       "enum": [
