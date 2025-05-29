@@ -396,12 +396,13 @@ export interface ApiAdInsertionAdInsertion extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     name: Schema.Attribute.String & Schema.Attribute.Required;
-    order: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
     position: Schema.Attribute.Enumeration<['Top', 'Side']> &
       Schema.Attribute.DefaultTo<'Top'>;
     publishedAt: Schema.Attribute.DateTime;
     slug: Schema.Attribute.UID<'name'> & Schema.Attribute.Required;
     startDate: Schema.Attribute.Date & Schema.Attribute.Required;
+    tier: Schema.Attribute.Enumeration<['Gold', 'Silver', 'Bronze']> &
+      Schema.Attribute.DefaultTo<'Bronze'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -622,6 +623,7 @@ export interface ApiCompanyCompany extends Struct.CollectionTypeSchema {
       > &
       Schema.Attribute.DefaultTo<0>;
     summary: Schema.Attribute.Text;
+    tin: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -733,8 +735,9 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    delete: Schema.Attribute.Enumeration<['Pending', 'Deleted']>;
     description: Schema.Attribute.Text;
-    image: Schema.Attribute.Media<'images' | 'files', true>;
+    image: Schema.Attribute.Media<'images' | 'files'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
