@@ -68,6 +68,9 @@
         "Pending",
         "Deleted"
       ]
+    },
+    "url": {
+      "type": "string"
     }
   }
 }
