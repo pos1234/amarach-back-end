@@ -721,7 +721,7 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
   collectionName: 'services';
   info: {
     description: '';
-    displayName: 'Service';
+    displayName: 'Product';
     pluralName: 'services';
     singularName: 'service';
   };
@@ -732,6 +732,7 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
     average_rating: Schema.Attribute.BigInteger;
     category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
     company: Schema.Attribute.Relation<'manyToOne', 'api::company.company'>;
+    country: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -745,16 +746,19 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     name: Schema.Attribute.String & Schema.Attribute.Required;
-    publishedAt: Schema.Attribute.DateTime;
-    reviews: Schema.Attribute.Relation<'oneToMany', 'api::review.review'>;
-    service_status: Schema.Attribute.Enumeration<
+    product_status: Schema.Attribute.Enumeration<
       ['Pending', 'Approved', 'Rejected']
     > &
       Schema.Attribute.DefaultTo<'Pending'>;
+    publishedAt: Schema.Attribute.DateTime;
+    reviews: Schema.Attribute.Relation<'oneToMany', 'api::review.review'>;
     slug: Schema.Attribute.UID<'name'> & Schema.Attribute.Required;
+    social_accounts: Schema.Attribute.Component<'shared.social', false>;
+    targetAudience: Schema.Attribute.Text;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    url: Schema.Attribute.String;
   };
 }
 

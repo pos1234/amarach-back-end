@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-05-13T15:12:39.845Z"
+    "x-generation-date": "2025-06-10T20:39:33.872Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -8358,7 +8358,7 @@
                             }
                           }
                         },
-                        "service_status": {
+                        "product_status": {
                           "type": "string",
                           "enum": [
                             "Pending",
@@ -8383,6 +8383,18 @@
                             "Pending",
                             "Deleted"
                           ]
+                        },
+                        "targetAudience": {
+                          "type": "string"
+                        },
+                        "country": {
+                          "type": "string"
+                        },
+                        "social_accounts": {
+                          "$ref": "#/components/schemas/SharedSocialComponent"
+                        },
+                        "url": {
+                          "type": "string"
                         },
                         "createdAt": {
                           "type": "string",
@@ -11862,7 +11874,7 @@
                             }
                           }
                         },
-                        "service_status": {
+                        "product_status": {
                           "type": "string",
                           "enum": [
                             "Pending",
@@ -11887,6 +11899,18 @@
                             "Pending",
                             "Deleted"
                           ]
+                        },
+                        "targetAudience": {
+                          "type": "string"
+                        },
+                        "country": {
+                          "type": "string"
+                        },
+                        "social_accounts": {
+                          "$ref": "#/components/schemas/SharedSocialComponent"
+                        },
+                        "url": {
+                          "type": "string"
                         },
                         "createdAt": {
                           "type": "string",
@@ -14401,7 +14425,7 @@
                                   }
                                 }
                               },
-                              "service_status": {
+                              "product_status": {
                                 "type": "string",
                                 "enum": [
                                   "Pending",
@@ -14426,6 +14450,18 @@
                                   "Pending",
                                   "Deleted"
                                 ]
+                              },
+                              "targetAudience": {
+                                "type": "string"
+                              },
+                              "country": {
+                                "type": "string"
+                              },
+                              "social_accounts": {
+                                "$ref": "#/components/schemas/SharedSocialComponent"
+                              },
+                              "url": {
+                                "type": "string"
                               },
                               "createdAt": {
                                 "type": "string",
@@ -18057,7 +18093,7 @@
                     }
                   }
                 },
-                "service_status": {
+                "product_status": {
                   "type": "string",
                   "enum": [
                     "Pending",
@@ -18082,6 +18118,18 @@
                     "Pending",
                     "Deleted"
                   ]
+                },
+                "targetAudience": {
+                  "type": "string"
+                },
+                "country": {
+                  "type": "string"
+                },
+                "social_accounts": {
+                  "$ref": "#/components/schemas/SharedSocialComponent"
+                },
+                "url": {
+                  "type": "string"
                 },
                 "createdAt": {
                   "type": "string",
@@ -20760,7 +20808,7 @@
                             }
                           }
                         },
-                        "service_status": {
+                        "product_status": {
                           "type": "string",
                           "enum": [
                             "Pending",
@@ -20785,6 +20833,18 @@
                             "Pending",
                             "Deleted"
                           ]
+                        },
+                        "targetAudience": {
+                          "type": "string"
+                        },
+                        "country": {
+                          "type": "string"
+                        },
+                        "social_accounts": {
+                          "$ref": "#/components/schemas/SharedSocialComponent"
+                        },
+                        "url": {
+                          "type": "string"
                         },
                         "createdAt": {
                           "type": "string",
@@ -23790,7 +23850,7 @@
                         }
                       }
                     },
-                    "service_status": {
+                    "product_status": {
                       "type": "string",
                       "enum": [
                         "Pending",
@@ -23815,6 +23875,18 @@
                         "Pending",
                         "Deleted"
                       ]
+                    },
+                    "targetAudience": {
+                      "type": "string"
+                    },
+                    "country": {
+                      "type": "string"
+                    },
+                    "social_accounts": {
+                      "$ref": "#/components/schemas/SharedSocialComponent"
+                    },
+                    "url": {
+                      "type": "string"
                     },
                     "createdAt": {
                       "type": "string",
@@ -28036,7 +28108,7 @@
                             }
                           }
                         },
-                        "service_status": {
+                        "product_status": {
                           "type": "string",
                           "enum": [
                             "Pending",
@@ -28061,6 +28133,18 @@
                             "Pending",
                             "Deleted"
                           ]
+                        },
+                        "targetAudience": {
+                          "type": "string"
+                        },
+                        "country": {
+                          "type": "string"
+                        },
+                        "social_accounts": {
+                          "$ref": "#/components/schemas/SharedSocialComponent"
+                        },
+                        "url": {
+                          "type": "string"
                         },
                         "createdAt": {
                           "type": "string",
@@ -28573,7 +28657,7 @@
                 ],
                 "example": "string or id"
               },
-              "service_status": {
+              "product_status": {
                 "type": "string",
                 "enum": [
                   "Pending",
@@ -28598,6 +28682,18 @@
                   "Pending",
                   "Deleted"
                 ]
+              },
+              "targetAudience": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "social_accounts": {
+                "$ref": "#/components/schemas/SharedSocialComponent"
+              },
+              "url": {
+                "type": "string"
               },
               "locale": {
                 "type": "string"
@@ -30160,7 +30256,7 @@
                                             }
                                           }
                                         },
-                                        "service_status": {
+                                        "product_status": {
                                           "type": "string",
                                           "enum": [
                                             "Pending",
@@ -30185,6 +30281,18 @@
                                             "Pending",
                                             "Deleted"
                                           ]
+                                        },
+                                        "targetAudience": {
+                                          "type": "string"
+                                        },
+                                        "country": {
+                                          "type": "string"
+                                        },
+                                        "social_accounts": {
+                                          "$ref": "#/components/schemas/SharedSocialComponent"
+                                        },
+                                        "url": {
+                                          "type": "string"
                                         },
                                         "createdAt": {
                                           "type": "string",
@@ -31469,7 +31577,7 @@
               }
             }
           },
-          "service_status": {
+          "product_status": {
             "type": "string",
             "enum": [
               "Pending",
@@ -31494,6 +31602,18 @@
               "Pending",
               "Deleted"
             ]
+          },
+          "targetAudience": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "social_accounts": {
+            "$ref": "#/components/schemas/SharedSocialComponent"
+          },
+          "url": {
+            "type": "string"
           },
           "createdAt": {
             "type": "string",
@@ -33458,7 +33578,7 @@
                                   }
                                 }
                               },
-                              "service_status": {
+                              "product_status": {
                                 "type": "string",
                                 "enum": [
                                   "Pending",
@@ -33483,6 +33603,18 @@
                                   "Pending",
                                   "Deleted"
                                 ]
+                              },
+                              "targetAudience": {
+                                "type": "string"
+                              },
+                              "country": {
+                                "type": "string"
+                              },
+                              "social_accounts": {
+                                "$ref": "#/components/schemas/SharedSocialComponent"
+                              },
+                              "url": {
+                                "type": "string"
                               },
                               "createdAt": {
                                 "type": "string",

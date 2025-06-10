@@ -8,5 +8,13 @@ module.exports = {
         auth: false,
       },
     },
+    {
+      method: 'GET',
+      path: '/review-product-stats/:productId',
+      handler: 'custom-controller.productStats',
+      config: {
+        auth: false,
+      },
+    },
   ],
 };
