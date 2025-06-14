@@ -4,7 +4,7 @@
   "info": {
     "singularName": "service",
     "pluralName": "services",
-    "displayName": "Service",
+    "displayName": "Product",
     "description": ""
   },
   "options": {
@@ -47,7 +47,7 @@
       "target": "api::category.category",
       "inversedBy": "services"
     },
-    "service_status": {
+    "product_status": {
       "type": "enumeration",
       "enum": [
         "Pending",
@@ -68,6 +68,17 @@
         "Pending",
         "Deleted"
       ]
+    },
+    "targetAudience": {
+      "type": "text"
+    },
+    "country": {
+      "type": "string"
+    },
+    "social_accounts": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.social"
     },
     "url": {
       "type": "string"
