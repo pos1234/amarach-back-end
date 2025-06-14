@@ -460,7 +460,6 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
       ['Pending', 'Approved', 'Rejected']
     > &
       Schema.Attribute.DefaultTo<'Pending'>;
-    comments: Schema.Attribute.Relation<'oneToMany', 'api::comment.comment'>;
     company: Schema.Attribute.Relation<'manyToOne', 'api::company.company'>;
     content: Schema.Attribute.Component<'shared.rich-text', false> &
       Schema.Attribute.Required;
@@ -528,47 +527,6 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-  };
-}
-
-export interface ApiCommentComment extends Struct.CollectionTypeSchema {
-  collectionName: 'comments';
-  info: {
-    displayName: 'Comment';
-    pluralName: 'comments';
-    singularName: 'comment';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    blog: Schema.Attribute.Relation<'manyToOne', 'api::blog.blog'>;
-    comment_status: Schema.Attribute.Enumeration<
-      ['Pending', 'Approved', 'Rejected']
-    > &
-      Schema.Attribute.DefaultTo<'Pending'>;
-    content: Schema.Attribute.RichText &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMaxLength<{
-        minLength: 500;
-      }>;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::comment.comment'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    users_permissions_user: Schema.Attribute.Relation<
-      'manyToOne',
-      'plugin::users-permissions.user'
-    >;
   };
 }
 
@@ -1251,7 +1209,6 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.DefaultTo<'user'>;
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     blogs: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'>;
-    comments: Schema.Attribute.Relation<'oneToMany', 'api::comment.comment'>;
     company: Schema.Attribute.Relation<'oneToOne', 'api::company.company'>;
     confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
     confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
@@ -1309,7 +1266,6 @@ declare module '@strapi/strapi' {
       'api::blog-category.blog-category': ApiBlogCategoryBlogCategory;
       'api::blog.blog': ApiBlogBlog;
       'api::category.category': ApiCategoryCategory;
-      'api::comment.comment': ApiCommentComment;
       'api::company.company': ApiCompanyCompany;
       'api::global.global': ApiGlobalGlobal;
       'api::review.review': ApiReviewReview;
