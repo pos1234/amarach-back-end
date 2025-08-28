@@ -1,0 +1,28 @@
+{
+    "collectionName": "components_shared_socials",
+    "info": {
+        "displayName": "social",
+        "description": ""
+    },
+    "options": {},
+    "attributes": {
+        "facebook": {
+            "type": "string"
+        },
+        "linkedin": {
+            "type": "string"
+        },
+        "twitter": {
+            "type": "string"
+        },
+        "tiktok": {
+            "type": "string"
+        },
+        "telegram": {
+            "type": "string"
+        },
+        "instagram": {
+            "type": "string"
+        }
+    }
+}

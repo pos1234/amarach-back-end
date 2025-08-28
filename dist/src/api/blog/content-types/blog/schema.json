@@ -1,0 +1,80 @@
+{
+    "kind": "collectionType",
+    "collectionName": "blogs",
+    "info": {
+        "singularName": "blog",
+        "pluralName": "blogs",
+        "displayName": "Blog",
+        "description": ""
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "attributes": {
+        "title": {
+            "type": "string",
+            "required": true
+        },
+        "slug": {
+            "type": "uid",
+            "targetField": "title",
+            "required": true
+        },
+        "users_permissions_user": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "plugin::users-permissions.user",
+            "inversedBy": "blogs"
+        },
+        "image": {
+            "type": "media",
+            "multiple": false,
+            "required": false,
+            "allowedTypes": [
+                "images",
+                "files"
+            ]
+        },
+        "enableComments": {
+            "type": "boolean",
+            "default": false
+        },
+        "blog_status": {
+            "type": "enumeration",
+            "enum": [
+                "Pending",
+                "Approved",
+                "Rejected"
+            ],
+            "default": "Pending"
+        },
+        "tags": {
+            "type": "relation",
+            "relation": "manyToMany",
+            "target": "api::tag.tag",
+            "mappedBy": "blogs"
+        },
+        "featured": {
+            "type": "boolean",
+            "default": false
+        },
+        "blog_category": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "api::blog-category.blog-category",
+            "inversedBy": "blogs"
+        },
+        "content": {
+            "type": "component",
+            "repeatable": false,
+            "component": "shared.rich-text",
+            "required": true
+        },
+        "company": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "api::company.company",
+            "inversedBy": "blogs"
+        }
+    }
+}
